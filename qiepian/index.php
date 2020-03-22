@@ -17,7 +17,8 @@ $pinyin = new Pinyin();
 $foler = 'C:/wamp64/www/shipin/'; //源文件目录
 $lid = '1';  //栏目序号
 $addId = '99'; //编号
-$fuzai = 'https://www.baidu.com/shipin/'; //负载地址
+$tupian = 'https://www.baidu.com/shipin/'; // 图片负载地址
+$shipin = 'https://www.baidu.com/shipin/'; // 视频负载地址
 
 $filesArr = getDirFiles($foler);
 print_r($filesArr);
@@ -38,9 +39,9 @@ for($i=0;$i<count($filesArr);$i++) {
 	$str = mb_convert_encoding($exts['filename'], "utf-8", "gbk");
 	file_put_contents($foler.'shipin/'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'/'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'.bat','cd /d "%~dp0"'.PHP_EOL.'D:\QIEPIAN\ffmpeg\ffmpeg.exe -i "'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'.mp4" -hls_time 1 -hls_list_size 0 -c:v libx264 -c:a aac -strict -2 -f hls "'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'.m3u8"'.PHP_EOL.'exit');
     if((count($filesArr)-1)==$i){
-        file_put_contents('mysql.txt',toUTF8("(".ceil($lid).", '".trim(str_replace(array('\'','"','<','>','%','_','&'),'',$exts['filename']))."', '".md5($exts['filename'])."', '', '', '', '', '', '', '<p>".trim(str_replace(array('\'','"','<','>','%','_','&'),'',$exts['filename']))."</p>', '".$fuzai.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'/'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).$ext_img."', '', '', '', '', 0, '0', 0, 0, ".time().", 0, 98, 98, 98, 98, ".time().", 1, 1, 0, 0, 0, 0, 0, 'ckm3u8', '', '".$fuzai.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'/'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).".m3u8"."', 'admin', '', '', '".strtoupper(substr($pinyin->abbr($str) , 0 , 1))."', '', '0.0', 0, 0, '', '', 0, '正片', '', '', 0, '0.0', NULL, '', '', '', '', '', '', '', '', '', NULL);".PHP_EOL), FILE_APPEND);
+        file_put_contents('mysql.txt',toUTF8("(".ceil($lid).", '".trim(str_replace(array('/','\'','"','<','>','%','_','&'),'',$exts['filename']))."', '".md5($exts['filename'])."', '', '', '', '', '', '', '<p>".trim(str_replace(array('/','\'','"','<','>','%','_','&'),'',$exts['filename']))."</p>', '".$tupian.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'/'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).$ext_img."', '', '', '', '', 0, '0', 0, 0, ".time().", 0, 98, 98, 98, 98, ".time().", 1, 1, 0, 0, 0, 0, 0, 'ckm3u8', '', '".$shipin.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'/'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).".m3u8"."', 'admin', '', '', '".strtoupper(substr($pinyin->abbr($str) , 0 , 1))."', '', '0.0', 0, 0, '', '', 0, '正片', '', '', 0, '0.0', NULL, '', '', '', '', '', '', '', '', '', NULL);".PHP_EOL), FILE_APPEND);
     }else{
-        file_put_contents('mysql.txt',toUTF8("(".ceil($lid).", '".trim(str_replace(array('\'','"','<','>','%','_','&'),'',$exts['filename']))."', '".md5($exts['filename'])."', '', '', '', '', '', '', '<p>".trim(str_replace(array('\'','"','<','>','%','_','&'),'',$exts['filename']))."', '".md5($exts['filename'])."</p>', '".$fuzai.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'/'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).$ext_img."', '', '', '', '', 0, '0', 0, 0, ".time().", 0, 98, 98, 98, 98, ".time().", 1, 1, 0, 0, 0, 0, 0, 'ckm3u8', '', '".$fuzai.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'/'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).".m3u8"."', 'admin', '', '', '".strtoupper(substr($pinyin->abbr($str) , 0 , 1))."', '', '0.0', 0, 0, '', '', 0, '正片', '', '', 0, '0.0', NULL, '', '', '', '', '', '', '', '', '', NULL),".PHP_EOL), FILE_APPEND);
+        file_put_contents('mysql.txt',toUTF8("(".ceil($lid).", '".trim(str_replace(array('/','\'','"','<','>','%','_','&'),'',$exts['filename']))."', '".md5($exts['filename'])."', '', '', '', '', '', '', '<p>".trim(str_replace(array('/','\'','"','<','>','%','_','&'),'',$exts['filename']))."', '".md5($exts['filename'])."</p>', '".$tupian.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'/'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).$ext_img."', '', '', '', '', 0, '0', 0, 0, ".time().", 0, 98, 98, 98, 98, ".time().", 1, 1, 0, 0, 0, 0, 0, 'ckm3u8', '', '".$shipin.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).'/'.str_pad(($i+1+$addId),5,"0",STR_PAD_LEFT).".m3u8"."', 'admin', '', '', '".strtoupper(substr($pinyin->abbr($str) , 0 , 1))."', '', '0.0', 0, 0, '', '', 0, '正片', '', '', 0, '0.0', NULL, '', '', '', '', '', '', '', '', '', NULL),".PHP_EOL), FILE_APPEND);
     }
 	@rename($old_img,$new_img)?'成功':'失败';
 	@rename($old_name,$new_name)?'成功':'失败';
